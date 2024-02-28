@@ -10,3 +10,5 @@ export const getCurrentYear = () => {
   const endDate = new Date(today.getFullYear(), 11, 31);
   return { startDate, endDate };
 };
+
+export const API_URL = "http://16.170.170.145:3000/";

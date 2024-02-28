@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { createInvoiceThunk, updateInvoiceThunk } from "../redux/invoiceSlice";
 
 import dayjs from "dayjs";
-import { getCurrentYear } from "../util/functions";
+import { API_URL, getCurrentYear } from "../util/functions";
 import type { GetProp, UploadFile, UploadProps } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
@@ -104,7 +104,7 @@ const FakturaModal = ({
         });
 
         // setUploading(true);
-        fetch("http://localhost:3000/upload", {
+        fetch(API_URL + "upload", {
           method: "POST",
           body: formData,
         })
@@ -163,7 +163,7 @@ const FakturaModal = ({
             uid: "-1",
             name: editData.fileName,
             status: "done",
-            url: "http://localhost:3000/" + editData.fileName,
+            url: API_URL + editData.fileName,
           },
         ]);
       }

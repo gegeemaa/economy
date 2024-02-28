@@ -7,7 +7,7 @@ import FakturaModal from "./FakturaModal";
 import type { AppDispatch, RootState } from "../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteInvoiceThunk, fetchInvoicesThunk } from "../redux/invoiceSlice";
-import { dateFormat } from "../util/functions";
+import { API_URL, dateFormat } from "../util/functions";
 
 export interface DataType {
   key: string;
@@ -54,7 +54,7 @@ const FakturaTable = () => {
       key: "fileName",
       render: (_, record) =>
         record.fileName ? (
-          <Image width={100} src={"http://localhost:3000/" + record.fileName} />
+          <Image width={100} src={API_URL + record.fileName} />
         ) : (
           ""
         ),

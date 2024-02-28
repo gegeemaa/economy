@@ -1,5 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { DataType } from "../components/FakturaTable";
+import { API_URL } from "../util/functions";
 
 interface InvoiceType {
   id: string;
@@ -64,7 +65,7 @@ const invoiceSlice = createSlice({
 export const fetchInvoicesThunk = createAsyncThunk(
   "invoices/fetchAllInvoice",
   async () => {
-    const response = await fetch("http://localhost:3000/invoices", {
+    const response = await fetch(API_URL + "invoices", {
       method: "GET",
     });
     const data = response.json();
@@ -77,7 +78,7 @@ export const createInvoiceThunk = createAsyncThunk<InvoiceType, DataType>(
   async (body) => {
     const { name, startDate, endDate, amount, fileName } = body;
 
-    const response = await fetch("http://localhost:3000/invoice", {
+    const response = await fetch(API_URL + "invoice", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -99,7 +100,7 @@ export const updateInvoiceThunk = createAsyncThunk<InvoiceType, DataType>(
   "invoice/update",
   async (body) => {
     const { key, name, startDate, endDate, amount, fileName } = body;
-    const response = await fetch("http://localhost:3000/updateInvoice/" + key, {
+    const response = await fetch(API_URL + "updateInvoice/" + key, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -122,7 +123,7 @@ export const deleteInvoiceThunk = createAsyncThunk<InvoiceType, DataType>(
   async (body) => {
     const { key } = body;
 
-    const response = await fetch("http://localhost:3000/invoice/" + key, {
+    const response = await fetch(API_URL + "invoice/" + key, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
