@@ -1,4 +1,39 @@
-# Backend
+# CRUD operation with image upload
+
+Application is hosted at https://economy-frontend.vercel.app/
+
+### Libraries
+
+A following stack of libraries are used to build the application:
+
+#### Frontend:
+
+    - React + TypeScript + Vite
+    - React Redux Toolkit
+    - React Router Dom
+    - Ant Design
+
+#### Backend:
+
+    - NestJS
+    - Prisma ORM
+    - Docker
+    - AWS EC2
+
+# Frontend installation
+
+```bash
+cd mobile
+
+# Install dependencies
+npm install
+
+# Start
+
+npm run dev
+```
+
+# Backend installation
 
 ## Prisma create migration and run it into DB command
 
