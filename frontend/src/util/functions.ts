@@ -11,4 +11,4 @@ export const getCurrentYear = () => {
   return { startDate, endDate };
 };
 
-export const API_URL = "http://16.170.170.145:3000/";
+export const API_URL = import.meta.env.VITE_API_URL;
