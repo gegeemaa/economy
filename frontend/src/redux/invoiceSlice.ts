@@ -1,4 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { DataType } from "../components/FakturaTable";
 
 interface InvoiceType {
   id: string;
@@ -29,10 +30,10 @@ const invoiceSlice = createSlice({
   name: "allInvoices",
   initialState,
   reducers: {
-    // fetchInvoices: (state: InvoiceState, action: PayloadAction<any>) => {
-    //   const { data } = action.payload;
-    //   state.invoices = data as InvoiceType[];
-    // },
+    fetchInvoices: (state: InvoiceState, action: PayloadAction<any>) => {
+      const { data } = action.payload;
+      state.invoices = data as InvoiceType[];
+    },
   },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
@@ -62,7 +63,7 @@ const invoiceSlice = createSlice({
 // First, create the thunk
 export const fetchInvoicesThunk = createAsyncThunk(
   "invoices/fetchAllInvoice",
-  async (thunkAPI) => {
+  async () => {
     const response = await fetch("http://localhost:3000/invoices", {
       method: "GET",
     });
@@ -71,9 +72,9 @@ export const fetchInvoicesThunk = createAsyncThunk(
   }
 );
 
-export const createInvoiceThunk = createAsyncThunk(
+export const createInvoiceThunk = createAsyncThunk<InvoiceType, DataType>(
   "invoice/create",
-  async (body, thunkAPI) => {
+  async (body) => {
     const { name, startDate, endDate, amount, fileName } = body;
 
     const response = await fetch("http://localhost:3000/invoice", {
@@ -94,9 +95,9 @@ export const createInvoiceThunk = createAsyncThunk(
   }
 );
 
-export const updateInvoiceThunk = createAsyncThunk(
+export const updateInvoiceThunk = createAsyncThunk<InvoiceType, DataType>(
   "invoice/update",
-  async (body, thunkAPI) => {
+  async (body) => {
     const { key, name, startDate, endDate, amount, fileName } = body;
     const response = await fetch("http://localhost:3000/updateInvoice/" + key, {
       method: "PUT",
@@ -116,9 +117,9 @@ export const updateInvoiceThunk = createAsyncThunk(
   }
 );
 
-export const deleteInvoiceThunk = createAsyncThunk(
+export const deleteInvoiceThunk = createAsyncThunk<InvoiceType, DataType>(
   "invoice/delete",
-  async (body, thunkAPI) => {
+  async (body) => {
     const { key } = body;
 
     const response = await fetch("http://localhost:3000/invoice/" + key, {

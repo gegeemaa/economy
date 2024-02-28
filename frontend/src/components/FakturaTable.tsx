@@ -4,12 +4,12 @@ import type { ColumnsType } from "antd/es/table";
 import { PlusOutlined } from "@ant-design/icons";
 import FakturaModal from "./FakturaModal";
 
-import type { RootState } from "../redux/store";
+import type { AppDispatch, RootState } from "../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteInvoiceThunk, fetchInvoicesThunk } from "../redux/invoiceSlice";
 import { dateFormat } from "../util/functions";
 
-interface DataType {
+export interface DataType {
   key: string;
   name: string;
   amount: number;
@@ -21,7 +21,7 @@ interface DataType {
 const FakturaTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const allInvoices = useSelector((state: RootState) => state.invoice.invoices);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [localInvoices, setLocalInvoices] = useState<DataType[]>([]);
   const [editData, setEditData] = useState<DataType | undefined>();
 

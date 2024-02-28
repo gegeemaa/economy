@@ -1,11 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import invoiceReducer from "./invoiceSlice";
-import incomingInvoiceReducer from "./incomingInvoiceSlice.ts";
 
 export const store = configureStore({
   reducer: {
     invoice: invoiceReducer,
-    incomingInvoice: incomingInvoiceReducer,
   },
 });
 

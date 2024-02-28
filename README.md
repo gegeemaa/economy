@@ -13,6 +13,7 @@ docker compose run --rm backend npm install
 docker compose run --rm backend npx prisma generate
 
 # Generate database schema
+docker compose up
 docker compose run --rm backend npx prisma migrate dev --name init
 
 # Start containers

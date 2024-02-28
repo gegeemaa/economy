@@ -2,10 +2,6 @@ import { Input, Modal, DatePicker, Space, Upload, message } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { createInvoiceThunk, updateInvoiceThunk } from "../redux/invoiceSlice";
-import {
-  createIncomingInvoiceThunk,
-  updateIncomingInvoiceThunk,
-} from "../redux/incomingInvoiceSlice";
 
 import dayjs from "dayjs";
 import { getCurrentYear } from "../util/functions";
@@ -20,14 +16,10 @@ function createItemToServer(
   if (itemPram.key) {
     if (pathPram === "outgoing") {
       dispatchPram(updateInvoiceThunk(itemPram));
-    } else if (pathPram === "incoming") {
-      dispatchPram(updateIncomingInvoiceThunk(itemPram));
     }
   } else {
     if (pathPram === "outgoing") {
       dispatchPram(createInvoiceThunk(itemPram));
-    } else if (pathPram === "incoming") {
-      dispatchPram(createIncomingInvoiceThunk(itemPram));
     }
   }
 }
@@ -85,7 +77,7 @@ const FakturaModal = ({
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [uploadFileList, setUploadFileList] = useState<UploadFile[]>([]);
-  const [uploading, setUploading] = useState(false);
+  // const [uploading, setUploading] = useState(false);
 
   const onInputChange = (key: string, value: string | number) => {
     if (key === "amount") {
@@ -111,7 +103,7 @@ const FakturaModal = ({
           formData.append("file", file as FileType);
         });
 
-        setUploading(true);
+        // setUploading(true);
         fetch("http://localhost:3000/upload", {
           method: "POST",
           body: formData,
@@ -135,7 +127,7 @@ const FakturaModal = ({
             message.error("upload failed.");
           })
           .finally(() => {
-            setUploading(false);
+            // setUploading(false);
           });
       } else {
         createItemToServer({ ...item, fileName: "" }, path, dispatch);
@@ -178,14 +170,14 @@ const FakturaModal = ({
     }
   }, [editData]);
 
-  const beforeUploadFunc = (file) => {
+  const beforeUploadFunc = () => {
     return false;
   };
 
   const props = {
     beforeUpload: beforeUploadFunc,
     multiple: false,
-    onRemove: (file) => {
+    onRemove: (file: any) => {
       const index = fileList.indexOf(file);
       const newFileList = fileList.slice();
       newFileList.splice(index, 1);
@@ -242,7 +234,7 @@ const FakturaModal = ({
           onChange={(e) => onInputChange("name", e.target.value)}
         />
         <RangePicker
-          value={[dayjs(item?.startDate), dayjs(item?.endDate)]}
+          value={[dayjs(new Date()), dayjs(new Date())]}
           onChange={onChangeDate}
         />
         <Input
