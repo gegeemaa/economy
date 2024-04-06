@@ -51,6 +51,7 @@ docker compose run --rm backend npx prisma generate
 docker compose up
 docker compose run --rm backend npx prisma migrate dev --name init
 
-# Start containers
-docker compose up
+# Connect to running database container
+docker compose exec database bash
+mysql -uroot -p
 ```
