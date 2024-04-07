@@ -23,7 +23,7 @@ A following stack of libraries are used to build the application:
 # Frontend installation
 
 ```bash
-cd mobile
+cd frontend
 
 # Install dependencies
 npm install
