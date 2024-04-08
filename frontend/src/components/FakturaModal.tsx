@@ -233,8 +233,12 @@ const FakturaModal = ({
           required
           onChange={(e) => onInputChange("name", e.target.value)}
         />
-        <RangePicker
+        {/* <RangePicker
           value={[dayjs(new Date()), dayjs(new Date())]}
+          onChange={onChangeDate}
+        /> */}
+        <RangePicker
+          value={[dayjs(item.startDate), dayjs(item.endDate)]}
           onChange={onChangeDate}
         />
         <Input
