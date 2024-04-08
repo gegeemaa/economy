@@ -1,6 +1,6 @@
 # CRUD operation with image upload
 
-Application is hosted at https://economy-frontend.vercel.app/
+Application is hosted at https://economy-smoky.vercel.app/
 
 ### Libraries
 

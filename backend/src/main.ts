@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as fs from 'fs';
 
+//https config
 const httpsOptions = {
   key: fs.readFileSync('./localhost.key'),
   cert: fs.readFileSync('./localhost.crt'),
