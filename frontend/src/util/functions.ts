@@ -8,7 +8,7 @@ export const getCurrentYear = () => {
   const today = new Date();
   const startDate = new Date(today.getFullYear(), 0, 1);
   const endDate = new Date(today.getFullYear(), 11, 31);
-  return { startDate, endDate };
+  return { startDate, endDate, today };
 };
 
 export const API_URL = import.meta.env.VITE_API_URL;

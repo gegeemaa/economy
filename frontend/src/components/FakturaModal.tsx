@@ -54,7 +54,7 @@ interface InvoiceType {
 
 const initialItem = {
   name: "",
-  startDate: getCurrentYear().startDate,
+  startDate: getCurrentYear().today,
   endDate: getCurrentYear().endDate,
   amount: 0,
   fileName: "",
@@ -139,6 +139,7 @@ const FakturaModal = ({
   };
   const handleCancel = () => {
     setItem(initialItem);
+    setFileList([]);
     onCancel();
   };
 
@@ -233,10 +234,6 @@ const FakturaModal = ({
           required
           onChange={(e) => onInputChange("name", e.target.value)}
         />
-        {/* <RangePicker
-          value={[dayjs(new Date()), dayjs(new Date())]}
-          onChange={onChangeDate}
-        /> */}
         <RangePicker
           value={[dayjs(item.startDate), dayjs(item.endDate)]}
           onChange={onChangeDate}
