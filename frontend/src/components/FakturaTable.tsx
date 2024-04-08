@@ -30,7 +30,7 @@ const FakturaTable = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text) => <a>{text}</a>,
+      render: (text, record) => <a onClick={() => openItem(record)}>{text}</a>,
     },
     {
       title: "Amount",
@@ -42,7 +42,7 @@ const FakturaTable = () => {
       key: "Date",
       render: (_, record) => (
         <Space size="middle">
-          <a>
+          <a onClick={() => openItem(record)}>
             {dateFormat(record.startDate)} - {dateFormat(record.endDate)}
           </a>
         </Space>
