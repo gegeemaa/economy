@@ -115,7 +115,11 @@ const FakturaTable = () => {
   };
   return (
     <>
-      <Table columns={columns} dataSource={localInvoices} />
+      <Table
+        columns={columns}
+        dataSource={localInvoices}
+        scroll={{ x: "30vh" }}
+      />
       <Button
         type="primary"
         shape="circle"
