@@ -47,7 +47,12 @@ const MainLayout = () => {
   return (
     <Layout style={{ padding: 0, margin: 0 }}>
       <Layout>
-        <Sider width={200} style={{ background: colorBgContainer }}>
+        <Sider
+          width={200}
+          style={{ background: colorBgContainer }}
+          breakpoint="sm"
+          collapsedWidth="0"
+        >
           <Menu
             mode="inline"
             defaultSelectedKeys={["1"]}
