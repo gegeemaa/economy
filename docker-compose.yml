@@ -1,13 +1,13 @@
 version: "2"
 services:
   backend:
-    image: node:20-alpine
+    build: .
     container_name: economy-backend
-    user: root
+    user: node
     working_dir: /home/node/app
     volumes:
       - ./backend:/home/node/app
-    command: "npm start"
+    command: "pnpm start"
     ports:
       - "3000:3000"
 
