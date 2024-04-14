@@ -2,7 +2,7 @@ import { Button, Checkbox, Form, type FormProps, Input } from "antd";
 import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
 import { AppDispatch } from "../../redux/store";
-import { isLoginThunk } from "../../redux/authSlice";
+import { loginThunk } from "../../redux/authSlice";
 
 type FieldType = {
   username?: string;
@@ -27,7 +27,7 @@ const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    dispatch(isLoginThunk());
+    dispatch(loginThunk(values));
     console.log("Success:", values);
   };
   return (
