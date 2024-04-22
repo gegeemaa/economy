@@ -1,6 +1,6 @@
 import { Button, Form, Input, type FormProps } from "antd";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { fetchLogin } from "../../util/http";
 
@@ -27,7 +27,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const isAuthenticaed = localStorage.getItem("userToken");
+    const isAuthenticaed = localStorage.getItem("user");
     if (isAuthenticaed) {
       navigate("/body");
     }
@@ -37,7 +37,17 @@ const Login = () => {
     fetchLogin(values)
       .then((data) => {
         if (data.token) {
-          localStorage.setItem("userToken", data.token);
+          type User = {
+            userToken: string;
+            userName: string;
+          };
+          const user: User = {
+            userToken: data.token,
+            userName: values.username!,
+          };
+          const userString = JSON.stringify(user);
+          localStorage.setItem("user", userString);
+          window.location.reload();
           navigate("/body");
         }
         console.log("userToken:  ", data.token);

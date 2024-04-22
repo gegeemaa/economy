@@ -2,7 +2,7 @@ import React from "react";
 import { Layout, Menu, theme } from "antd";
 import { AccountBookOutlined } from "@ant-design/icons";
 import FakturaTable from "../FakturaTable";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import type { MenuProps } from "antd";
 
 const { Content, Sider } = Layout;
@@ -10,10 +10,7 @@ const menuDataOriginal = [
   {
     label: "Faktura",
     icon: AccountBookOutlined,
-    children: [
-      // { label: "Incoming", linkcomponent: "/incomingInvoice" },
-      { label: "Outgoing", linkcomponent: "/outgoingInvoice" },
-    ],
+    children: [{ label: "Outgoing", linkcomponent: "/outgoingInvoice" }],
   },
 ];
 const menuData = menuDataOriginal.map((item, index) => {
@@ -66,10 +63,7 @@ export default function Body() {
             borderRadius: borderRadiusLG,
           }}
         >
-          <Routes>
-            <Route index element={<FakturaTable />} />
-            <Route path="/outgoingInvoice" element={<FakturaTable />} />
-          </Routes>
+          <FakturaTable />
         </Content>
       </Layout>
     </Layout>
