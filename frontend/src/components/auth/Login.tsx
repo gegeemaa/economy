@@ -1,8 +1,8 @@
-import { Button, Checkbox, Form, type FormProps, Input } from "antd";
-import { useDispatch } from "react-redux";
+import { Button, Form, Input, type FormProps } from "antd";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import { AppDispatch } from "../../redux/store";
-import { loginThunk } from "../../redux/authSlice";
+import { fetchLogin } from "../../util/http";
 
 type FieldType = {
   username?: string;
@@ -24,15 +24,32 @@ const Container = styled.div`
 `;
 
 const Login = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isAuthenticaed = localStorage.getItem("userToken");
+    if (isAuthenticaed) {
+      navigate("/body");
+    }
+  });
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    dispatch(loginThunk(values));
-    console.log("Success:", values);
+    fetchLogin(values)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem("userToken", data.token);
+          navigate("/body");
+        }
+        console.log("userToken:  ", data.token);
+      })
+      .catch((e) => {
+        console.log("Login hiih aldaa garlaa", e);
+      });
   };
+
   return (
     <Container>
-      <h2 style={{ textAlign: "center", paddingBottom: "20px" }}>Login via</h2>
+      <h2 style={{ textAlign: "center", paddingBottom: "20px" }}>Login</h2>
       <Form
         name="basic"
         labelCol={{ span: 8 }}
@@ -57,14 +74,6 @@ const Login = () => {
           rules={[{ required: true, message: "Please input your password!" }]}
         >
           <Input.Password />
-        </Form.Item>
-
-        <Form.Item<FieldType>
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{ offset: 8, span: 16 }}
-        >
-          <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
