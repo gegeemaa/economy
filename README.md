@@ -1,4 +1,4 @@
-# CRUD operation with image upload
+# CRUD operation with image upload, access token login
 
 Application is hosted at https://economy-smoky.vercel.app/
 
@@ -11,6 +11,7 @@ A following stack of libraries are used to build the application:
     - React + TypeScript + Vite
     - React Redux Toolkit
     - React Router Dom
+    - Localstorage for Authentication
     - Ant Design
 
 #### Backend:
