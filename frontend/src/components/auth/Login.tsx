@@ -1,6 +1,6 @@
 import { Button, Form, Input, type FormProps } from "antd";
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { fetchLogin } from "../../util/http";
 
@@ -25,6 +25,11 @@ const Container = styled.div`
 
 const Login = () => {
   const navigate = useNavigate();
+
+  const initialValues = {
+    username: "a",
+    password: "a",
+  };
 
   useEffect(() => {
     const isAuthenticaed = localStorage.getItem("user");
@@ -65,7 +70,7 @@ const Login = () => {
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 600 }}
-        initialValues={{ remember: true }}
+        initialValues={initialValues}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"

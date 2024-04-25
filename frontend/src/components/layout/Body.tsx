@@ -1,16 +1,18 @@
 import React from "react";
 import { Layout, Menu, theme } from "antd";
 import { AccountBookOutlined } from "@ant-design/icons";
-import FakturaTable from "../FakturaTable";
+import InvoiceTable from "../InvoiceTable";
 import { useNavigate } from "react-router-dom";
 import type { MenuProps } from "antd";
 
 const { Content, Sider } = Layout;
 const menuDataOriginal = [
   {
-    label: "Faktura",
+    label: "Invoice",
     icon: AccountBookOutlined,
-    children: [{ label: "Outgoing", linkcomponent: "/outgoingInvoice" }],
+    children: [
+      { label: "Outgoing Invoices", linkcomponent: "/outgoingInvoice" },
+    ],
   },
 ];
 const menuData = menuDataOriginal.map((item, index) => {
@@ -63,7 +65,7 @@ export default function Body() {
             borderRadius: borderRadiusLG,
           }}
         >
-          <FakturaTable />
+          <InvoiceTable />
         </Content>
       </Layout>
     </Layout>

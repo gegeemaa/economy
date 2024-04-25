@@ -47,6 +47,7 @@ const MainLayout = () => {
     if (localStorage.getItem("user")) {
       setUsername(JSON.parse(localStorage.getItem("user")!).userName);
       setAuth(true);
+      navigate("body");
     }
   }, []);
 

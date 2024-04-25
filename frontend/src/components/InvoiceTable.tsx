@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Space, Table, Image } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { PlusOutlined } from "@ant-design/icons";
-import FakturaModal from "./FakturaModal";
+import InvoiceModal from "./InvoiceModal";
 
 import type { AppDispatch, RootState } from "../redux/store";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,7 +18,7 @@ export interface DataType {
   fileName?: string;
 }
 
-const FakturaTable = () => {
+const InvoiceTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const allInvoices = useSelector((state: RootState) => state.invoice.invoices);
   const dispatch = useDispatch<AppDispatch>();
@@ -126,7 +126,7 @@ const FakturaTable = () => {
         icon={<PlusOutlined />}
         onClick={showModal}
       />
-      <FakturaModal
+      <InvoiceModal
         isModalOpen={isModalOpen}
         onSave={onSave}
         path="outgoing"
@@ -137,4 +137,4 @@ const FakturaTable = () => {
   );
 };
 
-export default FakturaTable;
+export default InvoiceTable;
