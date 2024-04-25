@@ -27,8 +27,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   const initialValues = {
-    username: "a",
-    password: "a",
+    username: "admin",
+    password: "admin",
   };
 
   useEffect(() => {
