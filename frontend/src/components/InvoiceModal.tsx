@@ -60,7 +60,7 @@ const initialItem = {
   fileName: "",
 };
 
-const FakturaModal = ({
+const InvoiceModal = ({
   isModalOpen,
   onSave,
   onCancel,
@@ -267,4 +267,4 @@ const FakturaModal = ({
   );
 };
 
-export default FakturaModal;
+export default InvoiceModal;

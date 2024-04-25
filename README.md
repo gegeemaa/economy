@@ -41,15 +41,18 @@ npm run dev
 # Create network
 docker network create database
 
+# Buld image
+docker compose build --build-arg UID=$(id -u) --build-arg GID=$(id -g) --no-cache
+
 # Install dependencies
-docker compose run --rm backend npm install
+docker compose run --rm backend pnpm install
 
 # Generate prisma client
-docker compose run --rm backend npx prisma generate
+docker compose run --rm backend pnpx prisma generate
 
 # Generate database schema
 docker compose up
-docker compose run --rm backend npx prisma migrate dev --name init
+docker compose run --rm backend pnpx prisma migrate dev --name init
 
 # Connect to running database container
 docker compose exec database bash

@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { DataType } from "../components/FakturaTable";
+import { DataType } from "../components/InvoiceTable";
 import { API_URL } from "../util/functions";
 
 interface InvoiceType {

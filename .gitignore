@@ -3,6 +3,7 @@ dist
 node_modules
 /data
 .env
+.pnpm-store
 
 # Logs
 logs

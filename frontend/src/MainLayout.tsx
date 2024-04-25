@@ -1,88 +1,108 @@
-import React from "react";
-import { AccountBookOutlined } from "@ant-design/icons";
-import { Layout, Menu, theme } from "antd";
+import { useEffect, useState } from "react";
+import { Button, Layout, Popover } from "antd";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import type { MenuProps } from "antd";
-import FakturaTable from "./components/FakturaTable";
+import styled from "styled-components";
+import iconProfile from "./util/icon-profile.svg";
+import Tooltip from "./common/tooltip";
+import { BASE_COLOR } from "./common/index";
+import Login from "./components/auth/Login";
+import Body from "./components/layout/Body";
+import ProtectedRoute from "./components/layout/ProtectedRoute";
 
-const { Content, Sider } = Layout;
+const { Header } = Layout;
 
-const menuDataOriginal = [
-  {
-    label: "Faktura",
-    icon: AccountBookOutlined,
-    children: [
-      // { label: "Incoming", linkcomponent: "/incomingInvoice" },
-      { label: "Outgoing", linkcomponent: "/outgoingInvoice" },
-    ],
-  },
-];
-
-const menuData = menuDataOriginal.map((item, index) => {
-  const key = String(index + 1);
-  return {
-    key: `sub${key}`,
-    icon: React.createElement(item.icon),
-    label: item.label,
-    children: item.children.map((subitem) => {
-      return {
-        key: subitem.linkcomponent,
-        label: subitem.label,
-      };
-    }),
-  };
-});
+export const FlexRow = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const ColumnLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
+export const Profile = styled.img`
+  width: 40px;
+  height: 40px;
+  border: 1px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+`;
+export const HeaderStyled = styled(Header)`
+  display: flex;
+  justify-content: right;
+  background: ${BASE_COLOR};
+  max-height: 50;
+  align-items: center;
+  padding-right: 20;
+`;
 
 const MainLayout = () => {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
-
   const navigate = useNavigate();
 
-  const onClick: MenuProps["onClick"] = (e) => {
-    navigate(e.key);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [isAuth, setAuth] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>("");
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setUsername(JSON.parse(localStorage.getItem("user")!).userName);
+      setAuth(true);
+      navigate("body");
+    }
+  }, []);
+
+  const onClickLogin = () => {
+    setMenuOpen(false);
+    navigate("/login");
+  };
+  const onClickLoginOut = () => {
+    setAuth(false);
+    setUsername("");
+    localStorage.removeItem("user");
+    navigate("/login");
   };
 
   return (
     <Layout style={{ padding: 0, margin: 0 }}>
-      <Layout>
-        <Sider
-          width={200}
-          style={{ background: colorBgContainer }}
-          breakpoint="sm"
-          collapsedWidth="0"
-        >
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
-            style={{ height: "100%", borderRight: 0 }}
-            onClick={onClick}
-            items={menuData}
-          />
-        </Sider>
-        <Layout style={{ padding: "24px" }}>
-          <Content
-            style={{
-              padding: 24,
-              margin: 0,
-              minHeight: 280,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
+      <HeaderStyled>
+        {/* <Tooltip text={name ? `Hello, ${name}` : ""}> */}
+        {/* <div>
+          <Link to={"/body"} style={{ color: "white" }}>
+            Body
+          </Link>
+        </div>
+        <div>
+          <Link to={"/login"} style={{ color: "white" }}>
+            Login
+          </Link>
+        </div> */}
+        <Tooltip text={username ? `Hello, ${username}` : ""}>
+          <Popover
+            placement="bottomRight"
+            open={menuOpen}
+            content={
+              isAuth ? (
+                <ColumnLayout>
+                  <Button onClick={onClickLoginOut}>Logout</Button>
+                </ColumnLayout>
+              ) : (
+                <Button onClick={onClickLogin}>Log in</Button>
+              )
+            }
+            onOpenChange={setMenuOpen}
+            trigger="click"
           >
-            <Routes>
-              <Route index element={<FakturaTable />} />
-              {/* <Route
-                path="/incomingInvoice"
-                element={<IncomingFakturaTable />}
-              /> */}
-              <Route path="/outgoingInvoice" element={<FakturaTable />} />
-            </Routes>
-          </Content>
-        </Layout>
-      </Layout>
+            <Profile src={iconProfile} alt={"profile"} />
+          </Popover>
+        </Tooltip>
+      </HeaderStyled>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<ProtectedRoute />}>
+          <Route path="/body" element={<Body />} />
+          <Route path="/outgoingInvoice" element={<Body />} />
+        </Route>
+      </Routes>
     </Layout>
   );
 };
