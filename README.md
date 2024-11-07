@@ -2,6 +2,8 @@
 
 Application is hosted at https://economy-smoky.vercel.app/
 
+![Resource topology in stack](stack-topology.png "Stack Topology")
+
 ### Libraries
 
 A following stack of libraries are used to build the application:
