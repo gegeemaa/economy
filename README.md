@@ -1,4 +1,6 @@
-# CRUD operation with image upload, access token login
+# CRUD operation with image upload, access token authentication
+
+Application is hosted at https://economy-smoky.vercel.app/
 
 ### Libraries
 
