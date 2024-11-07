@@ -1,6 +1,12 @@
-# CRUD operation with image upload, access token authentication
+# Economy app
 
 Application is hosted at https://economy-smoky.vercel.app/
+
+### Functionality
+
+    - CRUD operation
+    - Image upload
+    - Access token authentication
 
 ![Resource topology in stack](stack-topology.png "Stack Topology")
 
@@ -20,6 +26,7 @@ A following stack of libraries are used to build the application:
 
     - NestJS
     - Prisma ORM
+    - MariaDB
     - Docker
     - AWS EC2
 
