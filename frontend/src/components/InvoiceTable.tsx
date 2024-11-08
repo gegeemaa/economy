@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Space, Table, Image } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import InvoiceModal from "./InvoiceModal";
 
 import type { AppDispatch, RootState } from "../redux/store";
@@ -66,8 +66,20 @@ const InvoiceTable = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a onClick={() => openItem(record)}>Edit</a>
-          <a onClick={() => deleteItem(record)}>Delete</a>
+          {/* <a onClick={() => openItem(record)}>Edit</a>
+          <a onClick={() => deleteItem(record)}>Delete</a> */}
+
+          <Button
+            type="primary"
+            icon={<EditOutlined />}
+            onClick={() => openItem(record)}
+          />
+          <Button
+            type="primary"
+            danger
+            icon={<DeleteOutlined />}
+            onClick={() => deleteItem(record)}
+          />
         </Space>
       ),
     },
