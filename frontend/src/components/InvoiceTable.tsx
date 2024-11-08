@@ -36,6 +36,7 @@ const InvoiceTable = () => {
       title: "Amount",
       dataIndex: "amount",
       key: "amount",
+      render: (_, record) => record.amount,
     },
     {
       title: "Date",
