@@ -41,6 +41,7 @@ const InvoiceTable = () => {
     {
       title: "Date",
       key: "Date",
+      responsive: ["lg", "md"],
       render: (_, record) => (
         <Space size="middle">
           <a onClick={() => openItem(record)}>
