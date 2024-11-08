@@ -64,6 +64,7 @@ const MainLayout = () => {
 
   return (
     <Layout style={{ padding: 0, margin: 0 }}>
+      <div className="demo-logo" />
       <HeaderStyled>
         {/* <Tooltip text={name ? `Hello, ${name}` : ""}> */}
         {/* <div>
@@ -76,6 +77,7 @@ const MainLayout = () => {
             Login
           </Link>
         </div> */}
+
         <Tooltip text={username ? `Hello, ${username}` : ""}>
           <Popover
             placement="bottomRight"
