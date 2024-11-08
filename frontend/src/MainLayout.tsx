@@ -100,7 +100,7 @@ const MainLayout = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute />}>
           <Route path="/body" element={<Body />} />
-          <Route path="/outgoingInvoice" element={<Body />} />
+          <Route path="/incomingInvoice" element={<Body />} />
         </Route>
       </Routes>
     </Layout>

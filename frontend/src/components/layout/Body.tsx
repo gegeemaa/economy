@@ -11,7 +11,7 @@ const menuDataOriginal = [
     label: "Invoice",
     icon: AccountBookOutlined,
     children: [
-      { label: "Outgoing Invoices", linkcomponent: "/outgoingInvoice" },
+      { label: "Incoming Invoices", linkcomponent: "/incomingInvoice" },
     ],
   },
 ];
