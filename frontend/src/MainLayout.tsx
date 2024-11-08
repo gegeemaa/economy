@@ -65,27 +65,20 @@ const MainLayout = () => {
   return (
     <Layout style={{ padding: 0, margin: 0 }}>
       <HeaderStyled>
-        {/* <Tooltip text={name ? `Hello, ${name}` : ""}> */}
-        {/* <div>
-          <Link to={"/body"} style={{ color: "white" }}>
-            Body
-          </Link>
-        </div>
-        <div>
-          <Link to={"/login"} style={{ color: "white" }}>
-            Login
-          </Link>
-        </div> */}
-        <div
-          style={{
-            color: "#fff",
-            fontSize: "24px",
-            fontWeight: "bold",
-            marginRight: "auto",
-          }}
-        >
-          Delicate LLC
-        </div>
+        {username ? (
+          <div
+            style={{
+              color: "#fff",
+              fontSize: "20px",
+              fontWeight: "bold",
+              marginRight: "auto",
+            }}
+          >
+            Delicate LLC
+          </div>
+        ) : (
+          ""
+        )}
         <Tooltip text={username ? `Hello, ${username}` : ""}>
           <Popover
             placement="bottomRight"
