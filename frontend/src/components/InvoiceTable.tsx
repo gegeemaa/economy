@@ -50,7 +50,7 @@ const InvoiceTable = () => {
       ),
     },
     {
-      title: "Image",
+      title: "Attachment",
       dataIndex: "fileName",
       key: "fileName",
       render: (_, record) =>
