@@ -1,5 +1,5 @@
-import { Button, Form, Input, type FormProps } from "antd";
-import { useEffect } from "react";
+import { Button, Form, Input, type FormProps, message } from "antd";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { fetchLogin } from "../../util/http";
@@ -25,6 +25,8 @@ const Container = styled.div`
 
 const Login = () => {
   const navigate = useNavigate();
+  const [messageApi, contextHolder] = message.useMessage();
+  const [errorMessage, setErrorMessage] = useState("")
 
   const initialValues = {
     username: "admin",
@@ -37,6 +39,15 @@ const Login = () => {
       navigate("/body");
     }
   });
+
+  useEffect(() => {
+    if(errorMessage) {
+      messageApi.open({
+        type: 'error',
+        content: errorMessage,
+      });
+    }
+  }, [errorMessage])
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     fetchLogin(values)
@@ -54,16 +65,20 @@ const Login = () => {
           localStorage.setItem("user", userString);
           window.location.reload();
           navigate("/body");
+        } else {
+          setErrorMessage(`${data.statusCode}: ${data.error || data.message}`)
         }
         console.log("userToken:  ", data.token);
       })
       .catch((e) => {
         console.log("Login hiih aldaa garlaa", e);
       });
+      setErrorMessage("")
   };
 
   return (
     <Container>
+      {contextHolder}
       <h2 style={{ textAlign: "center", paddingBottom: "20px" }}>Login</h2>
       <Form
         name="basic"

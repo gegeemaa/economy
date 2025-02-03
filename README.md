@@ -61,7 +61,7 @@ docker compose run --rm backend pnpm install
 docker compose run --rm backend pnpx prisma generate
 
 # Generate database schema
-docker compose up
+mkdir -p data && docker compose up
 docker compose run --rm backend pnpx prisma migrate dev --name init
 
 # Connect to running database container
